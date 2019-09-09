@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+
+
+namespace ExceptionHandlingEx
+{
+    class StringlengthException : Exception
+    {
+        public StringlengthException(string message) : base(message)
+        {
+
+        }
+
+    }
+
+    public class Person
+    {
+        static void Main()
+        {
+            try
+            {
+
+
+                Person person = new Person();
+                string filePath = Console.ReadLine();
+                StreamReader sr = new StreamReader(filePath);
+                Console.WriteLine(sr.ReadToEnd());
+            }
+            catch(Exception )
+        }
+    }
+
+}
