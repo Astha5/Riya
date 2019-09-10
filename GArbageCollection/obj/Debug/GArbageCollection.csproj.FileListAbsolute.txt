@@ -1,0 +1,7 @@
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\bin\Debug\GArbageCollection.exe.config
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\bin\Debug\GArbageCollection.exe
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\bin\Debug\GArbageCollection.pdb
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\obj\Debug\GArbageCollection.csprojAssemblyReference.cache
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\obj\Debug\GArbageCollection.csproj.CoreCompileInputs.cache
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\obj\Debug\GArbageCollection.exe
+C:\Users\a40\source\repos\GArbageCollection\GArbageCollection\obj\Debug\GArbageCollection.pdb
