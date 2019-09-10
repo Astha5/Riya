@@ -1,0 +1,10 @@
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\bin\Debug\AssemblyExample.exe.config
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\bin\Debug\AssemblyExample.exe
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\bin\Debug\AssemblyExample.pdb
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\bin\Debug\ClassLibrary1.dll
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\bin\Debug\ClassLibrary1.pdb
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\obj\Debug\AssemblyExample.csprojAssemblyReference.cache
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\obj\Debug\AssemblyExample.csproj.CoreCompileInputs.cache
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\obj\Debug\AssemblyExample.csproj.CopyComplete
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\obj\Debug\AssemblyExample.exe
+C:\Users\a40\source\repos\AssemblyExample\AssemblyExample\obj\Debug\AssemblyExample.pdb
