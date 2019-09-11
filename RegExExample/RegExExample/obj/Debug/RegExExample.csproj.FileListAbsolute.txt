@@ -1,0 +1,7 @@
+C:\Users\a40\source\repos\RegExExample\RegExExample\bin\Debug\RegExExample.exe.config
+C:\Users\a40\source\repos\RegExExample\RegExExample\bin\Debug\RegExExample.exe
+C:\Users\a40\source\repos\RegExExample\RegExExample\bin\Debug\RegExExample.pdb
+C:\Users\a40\source\repos\RegExExample\RegExExample\obj\Debug\RegExExample.csprojAssemblyReference.cache
+C:\Users\a40\source\repos\RegExExample\RegExExample\obj\Debug\RegExExample.csproj.CoreCompileInputs.cache
+C:\Users\a40\source\repos\RegExExample\RegExExample\obj\Debug\RegExExample.exe
+C:\Users\a40\source\repos\RegExExample\RegExExample\obj\Debug\RegExExample.pdb

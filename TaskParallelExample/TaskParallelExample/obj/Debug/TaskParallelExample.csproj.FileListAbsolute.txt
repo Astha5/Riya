@@ -1,0 +1,7 @@
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\bin\Debug\TaskParallelExample.exe.config
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\bin\Debug\TaskParallelExample.exe
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\bin\Debug\TaskParallelExample.pdb
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\obj\Debug\TaskParallelExample.csprojAssemblyReference.cache
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\obj\Debug\TaskParallelExample.csproj.CoreCompileInputs.cache
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\obj\Debug\TaskParallelExample.exe
+C:\Users\a40\source\repos\TaskParallelExample\TaskParallelExample\obj\Debug\TaskParallelExample.pdb
