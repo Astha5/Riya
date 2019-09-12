@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace EMSException
+{
+    public class EmsException : ApplicationException
+    {
+        public EmsException()
+            : base()
+        {
+        }
+
+        public EmsException(string message)
+            : base(message)
+        {
+        }
+        public EmsException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+    }
+}

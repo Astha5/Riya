@@ -1,0 +1,150 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Ems.
+
+namespace Ems.BL
+{
+    class BusinessLayer
+    {
+        private static bool ValidateEmployee(Employee employee)
+        {
+            StringBuilder sb = new StringBuilder();
+            bool validEmployee = true;
+            if (employee.Employee <= 0)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Invalid Employee ID");
+
+            }
+            if (employee.EmployeeName == string.Empty)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Guest Employee Required");
+
+            }
+            if (employee.EmployeeContactNumber.Length < 10)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Required 10 Digit Contact Number");
+            }
+            if (validEmployee == false)
+                throw new EmsException(sb.ToString());
+            return validEmployee;
+        }
+
+        public static bool AddEmployeeBL(Employee newEmployee)
+        {
+            bool employeeAdded = false;
+            try
+            {
+                if (ValidateEmployee(newEmployee))
+                {
+                    employeeDL employeeDL = new EmployeeDL();
+                    employeeAdded = employeeDL.AddemployeeDL(newEmployee);
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employeeAdded;
+        }
+
+        public static List<Employee> GetAllEmployeeBL()
+        {
+            List<Employee> employeeList = null;
+            try
+            {
+                EmployeeDL employeeDL = new EmployeeDL();
+                employeeList = employeeDL.GetAllEmployeeDAL();
+            }
+            catch (EmsException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return employeeList;
+        }
+
+        public static Employee SearchEmployeeBL(int EmployeeID)
+        {
+            Guest searchEmployee = null;
+            try
+            {
+                EmployeeDL employeeDL = new EmployeeDL();
+                searchEmployee = employeeDL.SearchEmployeeDAL(EmployeeID);
+            }
+            catch (EmsException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return searchEmployee;
+
+        }
+
+        public static bool UpdateEmployeeBL(employee updateEmployee)
+        {
+            bool EmployeeUpdated = false;
+            try
+            {
+                if (ValidateEmployee(updateEmployee))
+                {
+                    EmployeeDL employeeDL = new employeeDL();
+                    employeeUpdated = employeeDL.UpdateEmployeeDL(updateEmployee);
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employeeUpdated;
+        }
+
+        public static bool DeleteEmployeeBL(int deleteEmployeeID)
+        {
+            bool employeeDeleted = false;
+            try
+            {
+                if (deleteEmployeeID > 0)
+                {
+                    EmployeeDL employeeDL = new employeeDL();
+                    employeeDeleted = employeeDL.DeleteEmployeeDL(deleteEmployeeID);
+                }
+                else
+                {
+                    throw new EmsException("Invalid Employee ID");
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employeeDeleted;
+        }
+    }
+}

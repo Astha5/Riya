@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Common;
+using EMSEL;
+using EMSException;
+using EMSDL;
+
+namespace EMSDL
+{
+  
+    
+    public class EmsDL
+    {
+        //Initialization of employee details
+        public static List<Employee> employeeList = new List<Employee>();
+
+        public bool AddEmployeeDL(Employee newEmployee)
+        {
+            bool employeeAdded = false;
+            try
+            {
+                employeeList.Add(newEmployee);
+                employeeAdded = true;
+            }
+            catch (SystemException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return employeeAdded;
+
+        }
+        //to get all the details
+        public List<Employee> GetAllEmployeeDL()
+        {
+            return employeeList;
+        }
+        //search employee
+        public Employee SearchEmployeeDL(int searchEmployeeID)
+        {
+            Employee searchEmployee = null;
+            try
+            {
+                searchEmployee = employeeList.Find(employee => employee.EmployeeID == searchEmployeeID);
+            }
+            catch (SystemException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return searchEmployee;
+        }
+        //update employee details
+        public bool UpdateEmployeeDL(Employee updateEmployee)
+        {
+            bool employeeUpdated = false;
+            try
+            {
+                for (int i = 0; i < employeeList.Count; i++)
+                {
+                    if (employeeList[i].EmployeeID == updateEmployee.EmployeeID)
+                    {
+                        updateEmployee.EmployeeName = employeeList[i].EmployeeName;
+                        updateEmployee.EmployeeContactNo = employeeList[i].EmployeeContactNo;
+                        employeeUpdated = true;
+                    }
+                }
+            }
+            catch (SystemException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return employeeUpdated;
+
+        }
+        //delete employee detail by ID
+        public bool DeleteEmployeeDL(int EmployeeID)
+        {
+            bool employeeDeleted = false;
+            try
+            {
+                Employee deleteEmployee = employeeList.Find(employee => employee.EmployeeID == EmployeeID);
+
+                if (deleteEmployee != null)
+                {
+                    employeeList.Remove(deleteEmployee);
+                    employeeDeleted = true;
+                }
+            }
+            catch (DbException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return employeeDeleted;
+
+        }
+    }
+}

@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+namespace EMSEL
+{
+    public class Employee
+    {
+        private int employeeID;
+
+        public int EmployeeID
+        {
+            get { return employeeID; }
+            set { employeeID = value; }
+        }
+
+        private string employeeName;
+
+        public string EmployeeName
+        {
+            get { return employeeName; }
+            set { employeeName = value; }
+        }
+        private string employeeDepartment;
+
+        public string EmployeeDepartment
+        {
+            get { return employeeDepartment; }
+            set { employeeDepartment = value; }
+        }
+        private long employeeContactNo;
+
+        public long EmployeeContactNo
+        {
+            get { return employeeContactNo; }
+            set
+            {
+                //validate the mobile no.
+                String pattern = @"^[6-9]{1}[0-9]{9}$";
+                if (Regex.Match(value.ToString(), pattern).Success)
+                    employeeContactNo = value;
+                else
+                {
+                    Console.WriteLine("invalid contact no.");
+                    Console.ReadLine();
+                }
+               
+            }
+        }
+        private string employeeEmail;
+
+        public string EmployeeEmail
+        {
+            get { return employeeEmail; }
+            set
+                {
+                //validate emailID.
+                String pattern = @"[a-z0-9][-a-z0-9._]+@([-a-z0-9]+.)+[a-z]{2,5}$";
+                if (Regex.Match(value, pattern).Success)
+                    employeeEmail = value;
+                else
+                {
+                    Console.WriteLine("invalid email ID");
+                    Console.ReadLine();
+                }
+
+            }
+        }
+        private string employeeAddress;
+
+        public string EmployeeAddress
+        {
+            get { return employeeAddress; }
+            set { employeeAddress = value; }
+        }
+        //variable declaration
+        public Employee()
+        {
+            employeeID = 0;
+            employeeName = string.Empty;
+            employeeDepartment = string.Empty;
+            employeeContactNo = 0;
+            employeeEmail = string.Empty;
+            employeeAddress = string.Empty;
+
+            
+        }
+    }
+}

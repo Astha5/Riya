@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ems.EL
+{
+    class Employee
+    {
+        private string EmployeeID;
+
+        public string employeeID
+        {
+            get { return EmployeeID; }
+            set { EmployeeID = value; }
+        }
+
+        private string EmployeeName;
+
+        public string employeeName
+        {
+            get { return EmployeeName; }
+            set { EmployeeName = value; }
+        }
+        private string EmployeeDepartment;
+
+        public string employeeDepartment
+        {
+            get { return EmployeeDepartment; }
+            set { EmployeeDepartment = value; }
+        }
+        private string EmployeeContactNo;
+
+        public string employeeContactNo
+        {
+            get { return EmployeeContactNo; }
+            set { EmployeeContactNo = value; }
+        }
+        private string EmployeeEmail;
+
+        public string employeeEmail
+        {
+            get { return EmployeeEmail; }
+            set { EmployeeEmail = value; }
+        }
+        private string EmployeeAddress;
+
+        public string employeeAddress
+        {
+            get { return EmployeeAddress; }
+            set { employeeAddress = value; }
+        }
+
+    }
+}

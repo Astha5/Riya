@@ -1,0 +1,161 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EMSDL;
+using EMSEL;
+using EMSException;
+using System.Text.RegularExpressions;
+
+
+namespace EMSBL
+{
+    public class EmsBL
+    {
+        EmsDL dl = new EmsDL();
+        private static bool ValidateEmployee(Employee employee)
+        {
+            StringBuilder sb = new StringBuilder();
+            bool validEmployee = true;
+            if (employee.EmployeeID <= 0)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Invalid Employee ID");
+
+            }
+           //validate the Employee Name
+            Regex regex = new Regex("^[a-zA-Z]+$");
+            if(!regex.IsMatch(employee.EmployeeName) || employee.EmployeeName==String.Empty)
+            {
+                validEmployee = false;
+                throw new Exception(employee.EmployeeName);
+            }
+            if(employee.EmployeeEmail==string.Empty)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Employee Address Required");
+            }
+            if (employee.EmployeeContactNo.ToString().Length < 10)
+            {
+                validEmployee = false;
+                sb.Append(Environment.NewLine + "Required 10 Digit Contact Number");
+            }
+            if (validEmployee == false)
+                throw new EmsException(sb.ToString());
+            return validEmployee;
+        }
+
+        public static bool AddEmployeeBL(Employee newEmployee)
+        {
+            bool employeeAdded = false;
+            try
+            {
+                if (ValidateEmployee(newEmployee))
+                {
+                    EmsDL employeeDL = new EmsDL();
+                    employeeAdded = employeeDL.AddEmployeeDL(newEmployee);
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employeeAdded;
+        }
+
+        public static List<Employee> GetAllEmployeeBL()
+        {
+            List<Employee> employeeList = null;
+            try
+            {
+                EmsDL employeeDL = new EmsDL();
+                employeeList = employeeDL.GetAllEmployeeDL();
+            }
+            catch (EmsException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return employeeList;
+        }
+
+        public static Employee SearchEmployeeBL(int EmployeeID)
+        {
+            Employee searchEmployee = null;
+            try
+            {
+                EmsDL employeeDL = new EmsDL();
+                searchEmployee = employeeDL.SearchEmployeeDL(EmployeeID);
+            }
+            catch (EmsException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return searchEmployee;
+
+        }
+
+        public static bool UpdateEmployeeBL(Employee updateEmployee)
+        {
+            bool EmployeeUpdated = false;
+            try
+            {
+                if (ValidateEmployee(updateEmployee))
+                {
+                    EmsDL employeeDL = new EmsDL();
+                    EmployeeUpdated = employeeDL.UpdateEmployeeDL(updateEmployee);
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return EmployeeUpdated;
+        }
+
+        public static bool DeleteEmployeeBL(int deleteEmployeeID)
+        {
+            bool employeeDeleted = false;
+            try
+            {
+                if (deleteEmployeeID > 0)
+                {
+                    EmsDL employeeDL = new EmsDL();
+                    employeeDeleted = employeeDL.DeleteEmployeeDL(deleteEmployeeID);
+                }
+                else
+                {
+                    throw new EmsException("Invalid Employee ID");
+                }
+            }
+            catch (EmsException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return employeeDeleted;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Common;
+using Ems.EL;
+
+
+
+namespace EmsDL
+{
+
+    class DataAccessLayer
+    {
+        public static List<Employee> employeeList = new List<Employee>();
+
+        public bool AddEmployeeDL(Employee newEmployee)
+        {
+            bool employeeAdded = false;
+            try
+            {
+                employeeList.Add(newEmployee);
+                employeeAdded = true;
+            }
+            catch (SystemException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return employeeAdded;
+
+        }
+        public List<Employee> GetAllEmployeeDL()
+        {
+            return employeeList;
+        }
+        public Employee SearchEmployeeDL(int EmployeeID)
+        {
+            Employee searchEmployee = null;
+            try
+            {
+                searchEmployee = employeeList.Find(employee => employee.employeeID == EmployeeID);
+            }
+            catch (SystemException ex)
+            {
+                throw new EmsException(ex.Message);
+            }
+            return searchEmployee;
+        }
+    }
+}

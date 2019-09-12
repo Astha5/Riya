@@ -1,0 +1,210 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EMSEL;
+using EMSException;
+using EMSBL;
+
+namespace EMSPL
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int choice;
+            do
+            {
+               
+                PrintMenu();
+                Console.Write("Enter your Choice:");
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        AddEmployee();
+                        break;
+                    case 2:
+                        ListAllEmployees();
+                        break;
+                    case 3:
+                        SearchEmployeeByID();
+                        break;
+                    case 4:
+                        UpdateEmployee();
+                        break;
+                    case 5:
+                        DeleteEmployee();
+                        break;
+                    case 6:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid Choice");
+                        break;
+                }
+            } while (choice != -1);
+        }
+
+        private static void DeleteEmployee()
+        {
+            try
+            {
+                int deleteEmployeeID;
+                Console.WriteLine("Enter Employee ID to Delete:");
+                deleteEmployeeID = int.Parse(Console.ReadLine());
+                Employee deleteEmployee = EmsBL.SearchEmployeeBL(deleteEmployeeID);
+                if (deleteEmployee != null)
+                {
+                    bool employeedeleted = EmsBL.DeleteEmployeeBL(deleteEmployeeID);
+                    if (employeedeleted)
+                        Console.WriteLine("Employee Deleted");
+                    else
+                        Console.WriteLine("Employee not Deleted ");
+                }
+                else
+                {
+                    Console.WriteLine("No Employee Details Available");
+                }
+
+
+            }
+            catch (EmsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private static void UpdateEmployee()
+        {
+            try
+            {
+                int updateEmployeeID;
+                Console.WriteLine("Enter EmployeeID to Update Details:");
+                updateEmployeeID = int.Parse(Console.ReadLine());
+                Employee updatedEmployee = EmsBL.SearchEmployeeBL(updateEmployeeID);
+                if (updatedEmployee != null)
+                {
+                    Console.WriteLine("Update Employee Name :");
+                    updatedEmployee.EmployeeName = Console.ReadLine();
+                    Console.WriteLine("Update PhoneNumber :");
+                    updatedEmployee.EmployeeContactNo = long.Parse(Console.ReadLine());
+                    bool EmployeeUpdated = EmsBL.UpdateEmployeeBL(updatedEmployee);
+                    if (EmployeeUpdated)
+                        Console.WriteLine("Employee Details Updated");
+                    else
+                        Console.WriteLine("Employee Details not Updated ");
+                }
+                else
+                {
+                    Console.WriteLine("No Employee Details Available");
+                }
+
+
+            }
+            catch (EmsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private static void SearchEmployeeByID()
+        {
+            try
+            {
+                int searchEmployeeID;
+                Console.WriteLine("Enter EmployeeID to Search:");
+                searchEmployeeID = int.Parse(Console.ReadLine());
+                Employee searchEmployee = EmsBL.SearchEmployeeBL(searchEmployeeID);
+                if (searchEmployee != null)
+                {
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine("EmployeeID\t\tName\t\tPhoneNumber");
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine("{0}\t\t{1}\t\t{2}", searchEmployee.EmployeeID, searchEmployee.EmployeeName, searchEmployee.EmployeeContactNo);
+                    Console.WriteLine("******************************************************************************");
+                }
+                else
+                {
+                    Console.WriteLine("No Employee Details Available");
+                }
+
+            }
+            catch (EmsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+        private static void ListAllEmployees()
+        {
+            try
+            {
+                List<Employee> employeeList = EmsBL.GetAllEmployeeBL();
+                if (employeeList != null)
+                {
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine("EmployeeID\t\tName\t\tDepartment\t\tContactNumber\t\tEmailAddress\t\tAddress");
+                    Console.WriteLine("******************************************************************************");
+                    foreach (Employee employee in employeeList)
+                    {
+                        Console.WriteLine("{0}\t\t{1}\t\t{2}\t\t{3}\t\t{4}\t\t{5}", employee.EmployeeID, employee.EmployeeName,employee.EmployeeDepartment, employee.EmployeeContactNo,employee.EmployeeEmail,employee.EmployeeAddress);
+                    }
+                    Console.WriteLine("******************************************************************************");
+
+                }
+                else
+                {
+                    Console.WriteLine("No Employee Details Available");
+                }
+            }
+            catch (EmsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private static void AddEmployee()
+        {
+            try
+            {
+                Employee newEmployee = new Employee();
+                Console.WriteLine("Enter Employee ID :");
+                newEmployee.EmployeeID = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Employee Name :");
+                newEmployee.EmployeeName = Console.ReadLine();
+                Console.WriteLine("Enter Employee Department:");
+                newEmployee.EmployeeDepartment = Console.ReadLine();
+                Console.WriteLine("Enter Contact No.:");
+                newEmployee.EmployeeContactNo = long.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Email ID:");
+                newEmployee.EmployeeEmail = Console.ReadLine();
+                Console.WriteLine("Enter Employee Address:");
+                newEmployee.EmployeeAddress = Console.ReadLine();
+                bool guestAdded = EmsBL.AddEmployeeBL(newEmployee);
+
+                if (guestAdded)
+                    Console.WriteLine("Employee Added");
+                else
+                    Console.WriteLine("Employee not Added");
+            }
+            catch (EmsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        
+        private static void PrintMenu()
+        {
+            Console.WriteLine("\n***********Employee PhoneBook Menu***********");
+            Console.WriteLine("1. Add Employee");
+            Console.WriteLine("2. List All Employees");
+            Console.WriteLine("3. Search Employees by ID");
+            Console.WriteLine("4. Update Employee");
+            Console.WriteLine("5. Delete Employee");
+            Console.WriteLine("6. Exit");
+            Console.WriteLine("******************************************\n");
+        }
+    }
+}
