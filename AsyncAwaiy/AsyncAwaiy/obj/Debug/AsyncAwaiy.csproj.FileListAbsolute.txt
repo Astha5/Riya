@@ -1,0 +1,7 @@
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\bin\Debug\AsyncAwaiy.exe.config
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\bin\Debug\AsyncAwaiy.exe
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\bin\Debug\AsyncAwaiy.pdb
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\obj\Debug\AsyncAwaiy.csprojAssemblyReference.cache
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\obj\Debug\AsyncAwaiy.csproj.CoreCompileInputs.cache
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\obj\Debug\AsyncAwaiy.exe
+C:\Users\a40\source\repos\AsyncAwaiy\AsyncAwaiy\obj\Debug\AsyncAwaiy.pdb
