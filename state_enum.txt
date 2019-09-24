@@ -1,0 +1,11 @@
+using System;
+using System.Collections.Generic;
+
+namespace Capgemini.Inventory.Helpers
+{
+    public enum State
+    {
+        AndhraPradesh, ArunachalPradesh, Assam, Bihar, Chattisgarh, Goa, Gujarat, Haryana, HimachalPradesh,JammuKashmir, Jharkhand, Karnataka, Kerala, MadhyaPradesh,Maharashtra,Manipur,Meghalaya,Mizoram,Nagaland,Odisha,Punjab,Rajasthan,Sikkim,TamilNadu,Telengana,Tripura,UttarPradesh,
+        Uttarakhand,WestBengal, AndamanNicobarIslands, Chandigarh, DadraNagarHaveli, DamanDiu, Delhi, Lakshadweep,Puducherry
+    }
+}
