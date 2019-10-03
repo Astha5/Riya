@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>This is the first html page</title>
+</head>
+<body style="background-color:aquamarine;font-size:24pt;color:darkblue">
+    Hello Everyone!
+    <p style="color:black;font-size:18pt">Todays Top News </p>
+    <image src="C:\Users\a40\Desktop\download.jpg"></image>
+    <hr />
+
+    <div style="color:red;font-size:16pt">1) Clean India mission has become a people's movement: President Kovind</div>
+
+
+    <h4 style="color:black;font-size:12pt">Speaking at India Today's Safaigiri Awards 2019, President Ram Nath Kovind hailed the Swachh Bharat Abhiyan launched by the Narendra Modi government five years ago</h4>
+
+    <div style="color:red;font-size:16pt">2) Today is Sowrasree's Birthday</div>
+
+    <h4 style="color:black;font-size:12pt">Sowrasree aka Sows turned 23 today</h4>
+    <image src="C:\Users\a40\Desktop\download(1).jpg"></image>
+    <!--<image alt="Unable to load" src="C:\Users\a40\Desktop\download(1).jpg"></image>-->
+    <hr>
+    <input type="checkbox" value="Select"/>Select
+    <input type="button"value="Submit" />
+    <input type="text" value="Enter something" />
+    <h3><a href="https://www.indiatoday.in/india?page=4">For more news... <a/></h3> <h5>Thank You</h5>
+</body>
+</html>
