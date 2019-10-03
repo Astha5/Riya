@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome to :Drink & Delight</title>
+    <style type="text/css">.test {color:blueviolet;font-size:15pt;} input[type=text]{border-color:blue;}
+        input[type=text]:hover {
+            border-color: coral;
+        }
+    </style>
+</head>
+<body style="background-color:blanchedalmond">
+
+    <marquee behavior="scroll" direction="right" scrollamount="20" style="color:chocolate;font-size:30pt">Welcome to Drink & Delight!!</marquee>
+    <div style="text-align:center;border:2px solid brown;background-color:firebrick"><b>Please Login to continue</b></div>
+    <image src="C:\Users\a40\Desktop\dd.png"></image><br />
+    <h3>***Login Page***</h3>
+    <form action=" Supplier.html" method="post">
+        <b>Enter Username</b><input type="email" /><br /><br />
+        <b>Enter Password</b><input type="password" /><br /><br />
+        <input type="button" value="Cancel" onclick="alert(docu
+        .getElementbyId('txtProduct').value);" />
+        <input type="submit" value="submit" /><br />
+        <a href="www.google.com">Forgot Password...</a><br />
+        <a href=" www.yoyo.com">Signup...</a><br />
+        <br />
+    </form>
+    <table border="1" cellpadding="1" cellspacing="0" style="width:100%">
+
+        <tr><td>Product</td><td><select size="1"><option>Tonic Water</option><option>Mocktails</option><option>Soda</option><option>Juice</option></select></td></tr>
+
+        <tr><td>Quantity</td><td><select size="1"><option>25</option><option>50</option><option>75</option><option>100</option></select></td></tr>
+        <tr><td>Price</td><td><input type="text" /></td></tr>
+    </table>
+
+</body>
+</html>
