@@ -1,0 +1,1729 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Capgemini.Inventory.BusinessLayer;
+using Capgemini.Inventory.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Capgemini.Inventory.UnitTests
+{
+    //Developed by Astha
+    //Creation Date :2019/10/01
+    [TestClass]
+    public class AddSupplierBLTest
+    {
+        /// <summary>
+        /// Add Supplier to the Collection if it is valid.
+        /// </summary>
+        [TestMethod]
+        public async Task AddValidSupplier()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+               ( isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Name can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierNameCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = null, SupplierMobile = "9988776655", Password = "Smith123#", Email = "smith@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Mobile can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierMobileCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Smith", SupplierMobile = null, Password = "Smith123#", Email = "smith@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Password can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierPasswordCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Allen", SupplierMobile = "9877766554", Password = null, Email = "allen@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Email can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierEmailCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9876543210", Password = "John123#", Email = null };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierName should contain at least two characters
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierNameShouldContainAtLeastTwoCharacters()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "J", SupplierMobile = "9877897890", Password = "John123#", Email = "john@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierMobile should be a valid mobile number
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierMobileRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877", Password = "John123#", Email = "john@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+               ( isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Password should be a valid password as per regular expression
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierPasswordRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877897890", Password = "John", Email = "john@gmail.com" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Email should be a valid email as per regular expression
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierEmailRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877897890", Password = "John123#", Email = "john" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded,id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class UpdateSupplierBLTest
+    {
+        /// <summary>
+        /// Update Supplier to the Collection if it is valid.
+        /// </summary>
+        [TestMethod]
+        public async Task UpdateValidSupplier()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.AddSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isUpdated, errorMessage);
+            }
+        }
+
+        [TestMethod]
+        public async Task SupplierIDMustExist()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            Guid newGuid = new Guid(); //generating a new Guid
+
+            //passing a Guid that doess not exist. Thus method must not be able to update as the Guid will not exist.
+
+            Supplier Supplier = new Supplier() { SupplierName = null, SupplierMobile = "9988776655", Password = "Smith123#", Email = "smith@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated,id) = await SupplierBL.UpdateSupplierBL(Supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Name can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierNameCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = null, SupplierMobile = "9988776655", Password = "Smith123#", Email = "smith@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Mobile can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierMobileCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Smith", SupplierMobile = null, Password = "Smith123#", Email = "smith@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Password can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierPasswordCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "Allen", SupplierMobile = "9877766554", Password = null, Email = "allen@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Supplier Email can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierEmailCanNotBeNull()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9876543210", Password = "John123#", Email = null };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierName should contain at least two characters
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierNameShouldContainAtLeastTwoCharacters()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "J", SupplierMobile = "9877897890", Password = "John123#", Email = "john@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierMobile should be a valid mobile number
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierMobileRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877", Password = "John123#", Email = "john@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Password should be a valid password as per regular expression
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierPasswordRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877897890", Password = "John", Email = "john@gmail.com" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Email should be a valid email as per regular expression
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierEmailRegExp()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierName = "John", SupplierMobile = "9877897890", Password = "John123#", Email = "john" };
+            bool isUpdated = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isUpdated, id) = await supplierBL.UpdateSupplierBL(supplier);
+            }
+            catch (Exception ex)
+            {
+                isUpdated = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isUpdated, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class DeleteSupplierTest
+    {
+        /// <summary>
+        /// Delete Supplier if it is valid
+        /// </summary>
+        [TestMethod]
+        public async Task MakeValidDelete()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            Supplier Supplier = new Supplier() { SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isDeleted = false;
+            Guid newGuid;
+            (isDeleted, newGuid) = await SupplierBL.AddSupplierBL(Supplier);
+            Supplier.SupplierID = newGuid;
+
+
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+                isDeleted = await SupplierBL.DeleteSupplierBL(newGuid);
+            }
+            catch (Exception ex)
+            {
+                isDeleted = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isDeleted, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Suuplier ID to be deleted must exist
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierIDMustExist()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            Guid newGuid = new Guid(); //generating a new Guid
+
+            //passing a Guid that doess not exist. Thus method must not be able to update as the Guid will not exist.
+            bool isDeleted = false;
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+                isDeleted = await SupplierBL.DeleteSupplierBL(newGuid);
+            }
+            catch (Exception ex)
+            {
+                isDeleted = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDeleted, errorMessage);
+            }
+        }
+
+    }
+
+    [TestClass]
+    public class GetAllSuppliersTest
+    {
+        /// <summary>
+        /// Receive back all Supplier present in collection
+        /// </summary>
+        [TestMethod]
+        public async Task GetBackAllValidSupplier()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            Supplier Supplier = new Supplier() { SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            bool valuesGot = false;
+            Guid newGuid;
+            string errorMessage = null;
+            List<Supplier> Suppliers = await SupplierBL.GetAllSuppliersBL();
+            int count1 = Suppliers.Count;
+
+            (isAdded, newGuid) = await SupplierBL.AddSupplierBL(Supplier);
+            Suppliers =await SupplierBL.GetAllSuppliersBL();
+            int count2 = Suppliers.Count;
+
+            //Act
+            try
+            {
+                if (count2 == (count1 + 1))
+                {
+                    valuesGot = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                valuesGot = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(valuesGot, errorMessage);
+            }
+        }
+
+    }
+
+    [TestClass]
+    public class GetSupplierBySupplierIDTest
+    {
+        /// <summary>
+        /// Receive back raw material based on valid Raw Material ID
+        /// </summary>
+        [TestMethod]
+        public async Task GetValidSupplier()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            Supplier Supplier = new Supplier() { SupplierName = "Allen", SupplierMobile = "9877766554", Password = null, Email = "allen@gmail.com" };
+            bool isAdded = false;
+            bool isReturned = false;
+            Guid newGuid;
+            string errorMessage = null;
+            (isAdded, newGuid) = await SupplierBL.AddSupplierBL(Supplier);
+            Supplier returnedSupplier = new Supplier();
+
+            //Act
+            try
+            {
+                (returnedSupplier, newGuid) = await SupplierBL.GetSupplierBySupplierIDBL(newGuid);
+                if (returnedSupplier != null)
+                    isReturned = true;
+            }
+            catch (Exception ex)
+            {
+                isReturned = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isReturned, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Cannot return if the element does not exist in the list
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierIDMustExist()
+        {
+            //Arrange
+            SupplierBL SupplierBL = new SupplierBL();
+            bool isReturned = false;
+            string errorMessage = null;
+            Guid newGuid = new Guid();
+            Supplier returnedSupplier = null;
+
+
+            //Act
+            try
+            {
+                (returnedSupplier,newGuid) = await SupplierBL.GetSupplierBySupplierIDBL(newGuid);
+                if (returnedSupplier != null)
+                    isReturned = true;
+            }
+            catch (Exception ex)
+            {
+                isReturned = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isReturned, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class GetSuppliersByNameTest
+    {
+        [TestMethod]
+        public async Task GetSuppliersByName()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierID = new Guid(), SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            Supplier supplier1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+            Guid id1 = default(Guid);
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await supplierBL.AddSupplierBL(supplier);
+                (supplier1,id1) = await supplierBL.GetSupplierBySupplierIDBL(id);
+                List<Supplier> supplierlist = await supplierBL.GetSuppliersByNameBL(supplier1.SupplierName);
+                //supplier1 is used to store the reference given by search name method
+                foreach (Supplier item in supplierlist)
+                {
+                    if (supplier1.SupplierName == item.SupplierName)
+                    {
+                        isDisplayed = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isDisplayed, errorMessage);
+            }
+        }
+        [TestMethod]
+        public async Task InvalidName()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierID = new Guid(), SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            Supplier supplier1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+            Guid id1 = default(Guid);
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await supplierBL.AddSupplierBL(supplier);
+                (supplier1,id1) = await supplierBL.GetSupplierBySupplierIDBL(id);
+                List<Supplier> supplierlist = await supplierBL.GetSuppliersByNameBL(supplier1.SupplierName);
+                //supplier1 is used to store the reference given by search name method
+                foreach (Supplier item in supplierlist)
+                {
+                    if (supplier1.SupplierName == item.SupplierName)
+                    {
+                        isDisplayed = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDisplayed, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class GetSupplierByEmailTest
+    {
+        [TestMethod]
+        public async Task GetSupplierByEmail()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierID = new Guid(), SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            Supplier supplier1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await supplierBL.AddSupplierBL(supplier);
+                (supplier1,id) = await supplierBL.GetSupplierBySupplierIDBL(id);
+                Supplier supplier2 = await supplierBL.GetSupplierByEmailBL(supplier1.Email);
+                //supplier2 is used to store the reference given by search name method
+
+                {
+                    if (supplier1.SupplierName == supplier2.SupplierName)
+                    {
+                        isDisplayed = true;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDisplayed, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class GetSupplierByEmailAndPasswordTest
+    {
+        [TestMethod]
+        public async Task GetSupplierByEmailAndPassword()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierID = new Guid(), SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            Supplier supplier1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await supplierBL.AddSupplierBL(supplier);
+                (supplier1,id) = await supplierBL.GetSupplierBySupplierIDBL(id);
+                Supplier supplier2 = await supplierBL.GetSupplierByEmailAndPasswordBL(supplier1.Email, supplier1.Password);
+                //supplier2 is used to store the reference given by search name method
+
+                {
+                    if ((supplier1.Password.Equals(supplier2.Password)) && (supplier1.Email.Equals(supplier2.Email)))
+                    {
+                        isDisplayed = true;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDisplayed, errorMessage);
+            }
+        }
+
+    }
+
+    [TestClass]
+    public class UpdateSupplierPasswordTest
+    {
+        [TestMethod]
+        public async Task GetSupplierByEmailAndPassword()
+        {
+            //Arrange
+            SupplierBL supplierBL = new SupplierBL();
+            Supplier supplier = new Supplier() { SupplierID = new Guid(), SupplierName = "Scott", SupplierMobile = "9876543210", Password = "Scott123#", Email = "scott@gmail.com" };
+            bool isAdded = false;
+            Supplier supplier1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await supplierBL.AddSupplierBL(supplier);
+                (supplier1,id) = await supplierBL.GetSupplierBySupplierIDBL(id);
+                Supplier supplier2 = await supplierBL.GetSupplierByEmailAndPasswordBL(supplier1.Email, supplier1.Password);
+                //supplier2 is used to store the reference given by search name method
+
+                {
+                    if ((supplier1.Password.Equals(supplier2.Password)) && (supplier1.Email.Equals(supplier2.Email)))
+                    {
+                        isDisplayed = true;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDisplayed, errorMessage);
+            }
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+///SupplierAddress
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Capgemini.Inventory.BusinessLayer;
+using Capgemini.Inventory.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Capgemini.Inventory.UnitTests
+{
+    //Developed by Astha
+    //Creation Date :2019/10/01
+    [TestClass]
+    public class AddSupplierAddressBLTest
+    {
+        /// <summary>
+        /// Add SupplierAddress to the Collection if it is valid.
+        /// </summary>
+        [TestMethod]
+        public async Task AddValidSupplierAddress()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode="400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress Name can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressNameCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = null, SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress  can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressMobileCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = null, SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress city can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressPasswordCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = null, SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress Email can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressEmailCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = null, SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddressName should contain at least two characters
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressNameShouldContainAtLeastTwoCharacters()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = null};
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierPincode should be a valid  number
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressMobileRegExp()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "4007" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+       
+        }
+
+    [TestClass]
+    public class UpdateSupplierAddressBLTest
+    {
+        /// <summary>
+        /// Add SupplierAddress to the Collection if it is valid.
+        /// </summary>
+        [TestMethod]
+        public async Task UpdateValidSupplierAddress()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress Name can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressNameCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = null, SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress  can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressMobileCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = null, SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress city can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressPasswordCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = null, SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddress Email can't be null
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressEmailCanNotBeNull()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = null, SupplierPincode = "400708" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierAddressName should contain at least two characters
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressNameShouldContainAtLeastTwoCharacters()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = null };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// SupplierPincode should be a valid  number
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressMobileRegExp()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "4007" };
+            bool isAdded = false;
+            string errorMessage = null;
+            Guid id = default(Guid);
+
+            //Act
+            try
+            {
+                (isAdded, id) = await SupplierAddressBL.UpdateSupplierAddressBL(SupplierAddress);
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isAdded, errorMessage);
+            }
+        }
+
+
+    }
+
+    [TestClass]
+    public class DeleteSupplierAddressTest
+    {
+        /// <summary>
+        /// Delete SupplierAddress if it is valid
+        /// </summary>
+        [TestMethod]
+        public async Task MakeValidDelete()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isDeleted = false;
+            Guid newGuid;
+            (isDeleted, newGuid) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            SupplierAddress.SupplierAddressID = newGuid;
+
+
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+                isDeleted = await SupplierAddressBL.DeleteSupplierAddressBL(newGuid);
+            }
+            catch (Exception ex)
+            {
+                isDeleted = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isDeleted, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Suuplier ID to be deleted must exist
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressIDMustExist()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            Guid newGuid = new Guid(); //generating a new Guid
+
+            //passing a Guid that doess not exist. Thus method must not be able to update as the Guid will not exist.
+            bool isDeleted = false;
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+                isDeleted = await SupplierAddressBL.DeleteSupplierAddressBL(newGuid);
+            }
+            catch (Exception ex)
+            {
+                isDeleted = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDeleted, errorMessage);
+            }
+        }
+
+    }
+
+    [TestClass]
+    public class GetSupplierAddressAddressBySupplierAddressIDTest
+
+    {
+        /// <summary>
+        /// Receive back raw material based on valid Raw Material ID
+        /// </summary>
+        [TestMethod]
+        public async Task GetValidSupplierAddress()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            Guid newGuid;
+            string errorMessage = null;
+            (isAdded, newGuid) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            SupplierAddress returnedSupplierAddress = null;
+
+            //Act
+            try
+            {
+                (returnedSupplierAddress, newGuid) = await SupplierAddressBL.GetSupplierAddressBySupplierAddressIDBL(newGuid);
+                if (returnedSupplierAddress != null)
+                    isAdded = true;
+            }
+            catch (Exception ex)
+            {
+                isAdded = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isAdded, errorMessage);
+            }
+        }
+
+        /// <summary>
+        /// Cannot return if the element does not exist in the list
+        /// </summary>
+        [TestMethod]
+        public async Task SupplierAddressIDMustExist()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            bool isReturned = false;
+            string errorMessage = null;
+            Guid newGuid = new Guid();
+            SupplierAddress returnedSupplierAddress = null;
+
+
+            //Act
+            try
+            {
+                (returnedSupplierAddress, newGuid) = await SupplierAddressBL.GetSupplierAddressBySupplierAddressIDBL(newGuid);
+                if (returnedSupplierAddress != null)
+                    isReturned = true;
+            }
+            catch (Exception ex)
+            {
+                isReturned = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isReturned, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class GetSupplierAddresssByAddressLine1Test
+    {
+        [TestMethod]
+        public async Task GetSupplierAddresssByAddressLine1()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressID = new Guid(), SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            SupplierAddress SupplierAddress1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+                (SupplierAddress1,id) = await SupplierAddressBL.GetSupplierAddressBySupplierAddressIDBL(id);
+               SupplierAddress SupplierAddresslist = await SupplierAddressBL.GetSupplierAddressByAddressLine1BL(SupplierAddress1.SupplierAddressLine1);
+                //SupplierAddress1 is used to store the reference given by search name method
+                
+                    if (SupplierAddress1.SupplierAddressLine1.Equals(SupplierAddresslist.SupplierAddressLine1))
+                    {
+                        isDisplayed = true;
+                    }
+                
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(isDisplayed, errorMessage);
+            }
+        }
+        [TestMethod]
+        public async Task InvalidAddressLine1()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressID = new Guid(), SupplierAddressLine1 = "Flat202", SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            SupplierAddress SupplierAddressLine1 = null;
+            bool isDisplayed = false;
+            Guid id = default(Guid);
+            string errorMessage = null;
+
+            //Act
+            try
+            {
+
+                (isAdded, id) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+                (SupplierAddressLine1,id) = await SupplierAddressBL.GetSupplierAddressBySupplierAddressIDBL(id);
+                SupplierAddress SupplierAddresslist = await SupplierAddressBL.GetSupplierAddressByAddressLine1BL(SupplierAddress.SupplierAddressLine1);
+                //SupplierAddress1 is used to store the reference given by search name method
+                 if (SupplierAddress.SupplierAddressLine1 == SupplierAddresslist.SupplierAddressLine1)
+                    {
+                        isDisplayed = true;
+                    }
+                
+
+            }
+            catch (Exception ex)
+            {
+                isDisplayed = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsFalse(isDisplayed, errorMessage);
+            }
+        }
+    }
+
+    [TestClass]
+    public class GetAllSupplierAddresssTest
+    {
+        /// <summary>
+        /// Receive back all SupplierAddress present in collection
+        /// </summary>
+        [TestMethod]
+        public async Task GetBackAllValidSupplierAddress()
+        {
+            //Arrange
+            SupplierAddressBL SupplierAddressBL = new SupplierAddressBL();
+            SupplierAddress SupplierAddress = new SupplierAddress() { SupplierAddressLine2 = "Vrindavan Society", SupplierCity = "Mumbai", SupplierState = "Maharashtra", SupplierPincode = "400708" };
+            bool isAdded = false;
+            bool valuesGot = false;
+            Guid newGuid;
+            string errorMessage = null;
+            List<SupplierAddress> SupplierAddresss = await SupplierAddressBL.GetAllSuppliersAddressesBL();
+            int count1 = SupplierAddresss.Count;
+
+            (isAdded, newGuid) = await SupplierAddressBL.AddSupplierAddressBL(SupplierAddress);
+            SupplierAddresss = await SupplierAddressBL.GetAllSuppliersAddressesBL();
+            int count2 = SupplierAddresss.Count;
+
+            //Act
+            try
+            {
+                if (count2 == (count1 + 1))
+                {
+                    valuesGot = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                valuesGot = false;
+                errorMessage = ex.Message;
+            }
+            finally
+            {
+                //Assert
+                Assert.IsTrue(valuesGot, errorMessage);
+            }
+        }
+
+    }
+
+
+}
+
+
+
+
